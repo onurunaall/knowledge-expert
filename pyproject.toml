@@ -1,0 +1,49 @@
+[build-system]
+requires      = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name            = "knowledge-expert"
+version         = "0.1.0"
+description     = "RAG-based chat application over a local knowledge base"
+readme          = "README.md"
+requires-python = ">=3.9"
+authors         = [{ name = "Onur Ünal" }]
+license         = { text = "MIT" }
+
+dependencies = ["langchain-openai>=0.1.0",
+                "langchain-community>=0.1.0",
+                "chromadb>=0.5",
+                "openai>=1.30",
+                "tiktoken",
+                "numpy",
+                "pandas",
+                "plotly",
+                "umap-learn",
+                "gradio>=4.25",
+                "python-dotenv",
+                "unstructured",
+                "pdfminer.six"]
+
+[project.optional-dependencies]
+dev = ["pytest",
+       "coverage",
+       "ruff",
+       "black",
+       "pre-commit",
+       "nbmake",
+       "nbstripout"]
+
+[project.scripts]
+knowledge-expert = "knowledge_worker.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+extend-select = ["I"]
+line-length   = 100
+
+[tool.black]
+line-length     = 100
+target-version  = ["py39"]
